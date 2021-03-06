@@ -1,6 +1,7 @@
 package com.ecommerce.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 import org.junit.jupiter.api.Test;
@@ -48,5 +49,26 @@ class CartTest {
     cart.remove(ipadProItem);
 
     assertEquals(ipadPro,cart.showRemovedProducts().get(0));
+  }
+
+  @Test
+  void shouldDifferentiateCart() {
+    final Cart cart1 = new Cart();
+    final Cart cart2 = new Cart();
+
+    assertEquals(false,cart1.equals(cart2));
+  }
+
+  @Test
+  void shouldDifferentiateCartWhenProductIsAdded() {
+    final Item ipadProItem1 = new Item(1, new Product("Ipad Pro"));
+    final Item ipadProItem2 = new Item(1, new Product("Ipad Pro"));
+
+    final Cart cart1 = new Cart();
+    cart1.add(ipadProItem1);
+    final Cart cart2 = new Cart();
+    cart2.add(ipadProItem2);
+
+    assertEquals(false,cart1.equals(cart2));
   }
 }
